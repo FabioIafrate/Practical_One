@@ -7,8 +7,8 @@ data(airquality) #load the data to see it better
 
 #complete cases checks if a row has any NA, returns false if NA
 missing_rows <- airquality[!complete.cases(airquality), ] #Find all NA rows
-print(missing_rows) #Prints the actual missing rows
-rownames(missing_rows) #This gives all the rows as characters
+#print(missing_rows) #Prints the actual missing rows
+#rownames(missing_rows) #This gives all the rows as characters
 missing_rows_numbers <- as.character(rownames(missing_rows)) #Stores as numbers 
 print(missing_rows_numbers) # Prints to display 
 
@@ -40,4 +40,6 @@ df <- data.frame(ozone_stats, temp_stats)
 rownames(df) <- c("Mean", "SD", "Min", "Max")
 colnames(df) <- c("Ozone", "Temperature")
 print(df)
+
+
 

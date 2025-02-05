@@ -1,0 +1,46 @@
+---
+title: "Practical One"
+author: Fabio Iafrate
+format: html
+editor: visual
+---
+
+# Practical One
+
+## Task 1
+
+> Find all rows in “airquality” that have missing values.
+
+This was completed by using the **complete.cases()** function. The **complete.cases()** function checks to see if the rows have missing (NA) values and returns *TRUE* if there are no missing values and *FALSE* otherwise.
+
+```{r}
+data(airquality) #load the data to see it better
+
+
+###### 1. Rows With Missing Values ######
+
+#complete cases checks if a row has any NA, returns false if NA
+missing_rows <- airquality[!complete.cases(airquality), ] #Find all NA rows
+missing_rows_numbers <- as.character(rownames(missing_rows)) #Stores as numbers 
+print(missing_rows_numbers) # Prints to display 
+
+```
+
+The code outputs the row numbers with missing values. It is
+
+## Running Code
+
+When you click the **Render** button a document will be generated that includes both content and the output of embedded code. You can embed code like this:
+
+```{r}
+1 + 1
+```
+
+You can add options to executable code like this
+
+```{r}
+#| echo: false
+2 * 2
+```
+
+The `echo: false` option disables the printing of code (only output is displayed).
