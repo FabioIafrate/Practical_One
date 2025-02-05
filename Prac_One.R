@@ -27,17 +27,17 @@ mean_ozone <- mean(valid_ozone)
 sd_ozone <- sd(valid_ozone)
 min_ozone <- min(valid_ozone)
 max_ozone <- max(valid_ozone)
-ozone_stats <- c(mean_ozone, sd_ozone, min_ozone, max_ozone)
+ozone_stats <- c(mean_ozone, sd_ozone, min_ozone, max_ozone) #Vector for df
 
 mean_temp <- mean(valid_temp)
 sd_temp <- sd(valid_temp)
 min_temp <- min(valid_temp)
 max_temp <- max(valid_temp)
-temp_stats <- c(mean_temp, sd_temp, min_temp, max_temp)
+temp_stats <- c(mean_temp, sd_temp, min_temp, max_temp) #Vector for df
 
+#Creating a dataframe of the stats for printing purposes
 df <- data.frame(ozone_stats, temp_stats)
 rownames(df) <- c("Mean", "SD", "Min", "Max")
 colnames(df) <- c("Ozone", "Temperature")
-
 print(df)
 
