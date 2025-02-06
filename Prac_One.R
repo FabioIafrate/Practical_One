@@ -41,5 +41,11 @@ rownames(df) <- c("Mean", "SD", "Min", "Max")
 colnames(df) <- c("Ozone", "Temperature")
 print(df)
 
+################################################################################
+
+############## CARS DATASET ###############
+##### SETUP #####
+data(cars)
+class(cars)
 
 
