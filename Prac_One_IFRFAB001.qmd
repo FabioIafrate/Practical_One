@@ -70,6 +70,8 @@ print(df)
 > \hat{\beta} = (X^TX)^{-1}X^TY
 > $$Here, Y is the response variable, and X is the design matrix. The cars data (an R data set, also always available in R) contains two variables: speed and distance to stop. Fit a simple linear regression model to these data, i.e. find the estimates, using the equation above, and matrix calculations in R.
 
+Our goal is to estimate the parameters of the regression line using matrix operations rather than the built-in lm() function using R.
+
 ```{r}
 #| echo: false
 2 * 2
