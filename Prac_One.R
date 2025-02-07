@@ -48,59 +48,60 @@ print(df)
 data(cars)
 class(cars)
 
-##### VARIABLE DECLARATIONS #####
-y_vec <- cars$dist #dependent
-x_matrix <- model.matrix(dist ~ speed, data = cars) #design matrix
+##### FUNCTION ######
 
-print(x_matrix)
+matrix_regression <- function(formula, data){
+
+##### VARIABLE DECLARATIONS #####
+y_vec <- model.response(model.frame(formula, data)) #dependent
+x_matrix <- model.matrix(formula, data) #design matrix
+
 
 ##### COMPUTING X^TX #####
 xtx_matrix <- t(x_matrix) %*% x_matrix #transpose then matrix multiply
-print(xtx_matrix)
 
 ##### INVERSE #####
 inv_matrix <- solve(xtx_matrix) #no b value therefore solves for inverse
-print(inv_matrix)
 
 ##### COMPUTING X^TY #####
 xty <- t(x_matrix) %*% y_vec
-print(xty)
 
 ##### PARAMETER ESTIMATION USING GIVEN FORMULA #####
 beta <- inv_matrix %*% xty
-print(beta)
 
 y_hat <- x_matrix %*% beta
-print(y_hat)
 resids <- y_hat - y_vec
 
 ##### RESIDUAL VARIANCE #####
+n_obs <- nrow(data)
 p <- ncol(x_matrix)
 resvar <- sum(resids^2)/(n_obs-p)
 sigma <- sqrt(resvar)
 var_covar_matrix <- resvar * inv_matrix
-print(var_covar_matrix)
 
 ##### STANDARD ERROR #####
 stderr <- sqrt(diag(var_covar_matrix))
-print(stderr)
 
 ##### T STAT #####
 t_stat <- beta/stderr
-print(t_stat)
 
 ##### P-VALUES #####
 p_val <- 2*(1-pt(abs(t_stat), df = n_obs - p))
-print(p_val)
 
 ##### DATAFRAME FOR PRINTING #####
 results <- data.frame(row.names = c("(Intercept)", "Speed"), 
                       Estimate = beta, 
-                      Std_Error = stderr, 
+                      Std_Error = stderr,
+                      RSE = sigma,
                       t_statistic = t_stat, 
                       p_value = p_val)
+return(results)
 
-print(results)
+}
+
+mat_reg <- matrix_regression(dist~speed, cars)
+
+print(mat_reg)
 
 ##### COMPARE WITH LM() #####
 lin_reg_model = lm(dist ~ speed, data = cars)
